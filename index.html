@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rastgele Sayı Üretici</title>
+<style>
+    label {
+        display: block;
+        margin-bottom: 10px;
+    }
+</style>
+</head>
+<body>
+    <h2>Rastgele Sayı Üretici</h2>
+    <form id="randomNumberForm">
+        <label for="minValue">Minimum Değer: <span id="minValueLabel">0</span></label>
+        <input type="range" id="minValue" name="minValue" min="0" max="100" value="0">
+        <button type="button" onclick="setMinValue()">Seç</button>
+        <input type="text" id="minValueInput" name="minValueInput" readonly>
+
+        <label for="maxValue">Maksimum Değer: <span id="maxValueLabel">100</span></label>
+        <input type="range" id="maxValue" name="maxValue" min="0" max="100" value="100">
+        <button type="button" onclick="setMaxValue()">Seç</button>
+        <input type="text" id="maxValueInput" name="maxValueInput" readonly>
+        <br>
+        <button type="button" onclick="generateRandomNumber()">Üret</button>
+        <hr>
+        <label for="randomNumber">Rastgele Sayı: <span id="randomNumberLabel">0</span></label>
+    </form>
+
+    <script>
+        function generateRandomNumber() {
+            var min = parseInt(document.getElementById("minValue").value);
+            var max = parseInt(document.getElementById("maxValue").value);
+            var randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+            document.getElementById("randomNumberLabel").textContent = randomNumber;
+        }
+
+        function setMinValue() {
+            var min = parseInt(document.getElementById("minValue").value);
+            document.getElementById("minValueInput").value = min;
+        }
+
+        function setMaxValue() {
+            var max = parseInt(document.getElementById("maxValue").value);
+            document.getElementById("maxValueInput").value = max;
+        }
+
+        document.getElementById("minValue").addEventListener("input", function() {
+            var min = parseInt(this.value);
+            document.getElementById("minValueLabel").textContent = min;
+        });
+
+        document.getElementById("maxValue").addEventListener("input", function() {
+            var max = parseInt(this.value);
+            document.getElementById("maxValueLabel").textContent = max;
+        });
+    </script>
+</body>
+</html>
